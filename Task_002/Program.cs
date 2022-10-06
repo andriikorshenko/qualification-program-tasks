@@ -1,13 +1,13 @@
-﻿int[] array = { 1, 2, 3, 4, 4, 56 };
+﻿int[] arr1 = { 1, 2, 3, 4, 4, 56 };
 
-CheckArray(ref array);
+int[] arr2 = CheckArray(arr1);
 
-for (int i = 0; i < array.Length; i++)
+for (int i = 0; i < arr2.Length; i++)
 {
-    Console.WriteLine(array[i]);
+    Console.WriteLine(arr2[i]);
 }
 
-static void CheckArray(ref int[] array)
+static int[] CheckArray(int[] array)
 {
     for (int i = 1; i < array.Length; i++)
     {
@@ -16,6 +16,7 @@ static void CheckArray(ref int[] array)
             RemoveADuplicateFromArray(i - 1, ref array);
         }
     }
+    return array;
 }
 
 static void RemoveADuplicateFromArray(int indexToDelete, ref int[] array)
