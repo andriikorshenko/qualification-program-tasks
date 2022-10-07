@@ -10,13 +10,14 @@ int FiboLinear(int number)
     else if (number <= 2)
         return 1;
 
-    List<int> list = new() { 0, 1 };
+    int[] arr = { 0, 1 };
     int result = default;
 
     while (number-- > 2)
     {
-        result = list[^1] + list[^2];
-        list.Add(result);
+        result = arr[0] + arr[1];
+        arr[0] = arr[1];
+        arr[1] = result;
     }
     return result;
 }
