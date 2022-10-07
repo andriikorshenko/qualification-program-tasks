@@ -3026,11 +3026,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Desktop\\Tasks\\Task_004\\Task_004.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Desktop\\Tasks - Copy\\Task_004\\Task_004.csproj",
       "projectName": "Task_004",
-      "projectPath": "C:\\Users\\user\\Desktop\\Tasks\\Task_004\\Task_004.csproj",
+      "projectPath": "C:\\Users\\user\\Desktop\\Tasks - Copy\\Task_004\\Task_004.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Desktop\\Tasks\\Task_004\\obj\\",
+      "outputPath": "C:\\Users\\user\\Desktop\\Tasks - Copy\\Task_004\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",

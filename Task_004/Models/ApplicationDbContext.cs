@@ -8,8 +8,7 @@ namespace Task_004.Models
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             :base(options)
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
+            
         }
 
         DbSet<Author> Authors { get; set; } = null!;

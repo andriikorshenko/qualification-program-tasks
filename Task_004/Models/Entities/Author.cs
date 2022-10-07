@@ -17,6 +17,6 @@ namespace Task_004.Models.Entities
         [Required]
         public DateTime BirthDate { get; set; }
 
-        public ICollection<Book> Books { get; set; }
+        public ICollection<Book> Books { get; set; } = new List<Book>();
     }
 }

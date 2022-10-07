@@ -25,8 +25,6 @@ namespace Task_004.Models.Configurations
             typeBuilder
                 .Property(p => p.Genre)
                 .IsRequired();
-
-            typeBuilder.
         }
     }
 }

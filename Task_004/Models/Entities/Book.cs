@@ -6,8 +6,7 @@
         public string Name { get; set; }
         public int PageQty { get; set; }
         public Genre Genre { get; set; }
-        public int AuthorId { get; set; }
-        public Author Author { get; set; }
+        public ICollection<Author> Authors { get; set; } = new List<Author>();
     }
 
     public enum Genre : byte
