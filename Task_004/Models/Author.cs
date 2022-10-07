@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Task_004.Models.Entities
+namespace Task_004.Models
 {
     public class Author
     {
@@ -10,9 +10,9 @@ namespace Task_004.Models.Entities
 
         public string LastName { get; set; }
 
-        public string MiddleName { get; set; }
+        public string? MiddleName { get; set; } = null;
 
-        [DisplayFormat(DataFormatString = "{0:dd-mm-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         [Required]
         public DateTime BirthDate { get; set; }

@@ -1,8 +1,48 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<Author>
+@using Task_004.Models
+@using Task_004.ViewModels
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container p-3">
+        <div>
+            <a asp-controller="Home" class="btn btn-primary" asp-action="Create">Create New</a>
+        </div>
+        <br />
+    <table table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Author
+                </th>
+                <th>
+                    Books
+                </th>
+                <th>
+                    Options
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="50%">
+                        @item.LastName @item.FirstName @item.MiddleName
+                    </td>
+                    <td width="20%">
+                        @item.Books.Count
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Home" asp-action="Edit" asp-route-id="@item.Id">Edit</a><p>&nbsp;&nbsp;</p>
+                            <a asp-controller="Home" asp-action="Delete" asp-route-id="@item.Id">Delete</a><p>&nbsp;&nbsp;</p>
+                            <a asp-controller="Home" asp-action="Details" asp-route-id="@item.Id">Details</a><p>&nbsp;&nbsp;</p>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

@@ -1,0 +1,33 @@
+﻿@model Author
+@{
+    ViewData["Title"] = "Details About Author";
+}
+
+<div class="mb-3">
+    <label asp-for="FirstName"></label>
+    <input asp-for="FirstName" disabled class="form-control">
+</div>
+<div class="mb-3">
+    <label asp-for="LastName"></label>
+    <input asp-for="LastName" disabled class="form-control">
+</div>
+<div class="mb-3">
+    <label asp-for="MiddleName"></label>
+    <input asp-for="MiddleName" disabled class="form-control">
+</div>
+<div class="mb-3">
+    <label asp-for="BirthDate"></label>
+    <input asp-for="BirthDate.Date" disabled class="form-control">
+</div>
+
+<div class="mb-3">
+    <label asp-for="Books"></label>
+</div>
+
+<ul>
+@foreach(var item in Model.Books)
+{
+    
+    <li>@item</li><br/>
+}
+</ul>

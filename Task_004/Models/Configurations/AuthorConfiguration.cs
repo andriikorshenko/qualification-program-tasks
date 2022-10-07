@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Task_004.Models.Entities;
 
 namespace Task_004.Models.Configurations
 {

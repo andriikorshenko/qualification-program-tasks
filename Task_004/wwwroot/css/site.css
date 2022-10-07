@@ -16,3 +16,52 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.button {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.button a {
+    padding: 40px, 50px;
+    color: green;
+}
+
+.pop-up {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.pop-up-conteiner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.pop-up-body {
+    margin: auto;
+    width: 500px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    padding: 100px, 15px, 110px, 15px;
+    position: relative;
+}
+
+.pop-up-close {
+    position:absolute;
+    top:15px;
+    right:15px;
+    font-size:21px;
+    cursor: pointer; 
+}
+
+.pop-up-active {
+    display: block;
+}

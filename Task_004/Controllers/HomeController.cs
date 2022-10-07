@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using Task_004.Models;
-using Task_004.Models.Entities;
+using Task_004.ViewModels;
 
 namespace Task_004.Controllers
 {
@@ -21,7 +21,8 @@ namespace Task_004.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await _db.Authors.ToListAsync());
+            IEnumerable<Author> objAuthorList = await _db.Authors.Include(x => x.Books).ToListAsync();
+            return View(objAuthorList);
         }
 
         [HttpGet]
@@ -44,6 +45,7 @@ namespace Task_004.Controllers
             if (id != null)
             {
                 Author? author = await _db.Authors.FirstOrDefaultAsync(x => x.Id == id);
+                return View(author);
             }
             return NotFound();
         }
@@ -68,6 +70,17 @@ namespace Task_004.Controllers
                     await _db.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
+            }
+            return NotFound();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id != null)
+            {
+                Author? author = await _db.Authors.Include(x => x.Books).FirstOrDefaultAsync(x => x.Id == id);
+                return View(author);
             }
             return NotFound();
         }
