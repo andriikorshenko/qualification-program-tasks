@@ -1,26 +1,75 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using Task_004.Models;
+using Task_004.Models.Entities;
 
 namespace Task_004.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _logger = logger;
+            _db = db;
         }
 
-        public IActionResult Index()
+        [Route("")]
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            return View(await _db.Authors.ToListAsync());
+        }
+
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public async Task<IActionResult> Create(Author author)
         {
-            return View();
+            _db.Authors.Add(author);
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id != null)
+            {
+                Author? author = await _db.Authors.FirstOrDefaultAsync(x => x.Id == id);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Author author)
+        {
+            _db.Authors.Update(author);
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id != null)
+            {
+                Author? author = await _db.Authors.FirstOrDefaultAsync(x => x.Id == id);
+                if (author != null)
+                {
+                    _db.Authors.Remove(author);
+                    await _db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+            return NotFound();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
