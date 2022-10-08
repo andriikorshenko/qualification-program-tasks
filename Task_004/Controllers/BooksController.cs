@@ -1,29 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Diagnostics;
 using Task_004.Models;
 using Task_004.ViewModels;
 
 namespace Task_004.Controllers
 {
-    public class HomeController : Controller
+    public class BooksController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
+        public BooksController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _logger = logger;
             _db = db;
         }
 
-        [Route("")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            IEnumerable<Author> objAuthorList = await _db.Authors.Include(x => x.Books).ToListAsync();
-            return View(objAuthorList);
+            IEnumerable<Book> objBooksList = await _db.Books.Include(x => x.Authors).ToListAsync();
+            return View(objBooksList);
         }
 
         [HttpGet]
@@ -34,16 +32,16 @@ namespace Task_004.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Author author)
+        public async Task<IActionResult> Create(Book book)
         {
             if (ModelState.IsValid)
             {
-                _db.Authors.Add(author);
+                _db.Books.Add(book);
                 await _db.SaveChangesAsync();
-                TempData["success"] = "The author has been created succesfully!";
+                TempData["success"] = "The book has been created succesfully!";
                 return RedirectToAction("Index");
             }
-            return View(author);
+            return View(book);
         }
 
         [HttpGet]
@@ -51,24 +49,24 @@ namespace Task_004.Controllers
         {
             if (id != null)
             {
-                Author? author = await _db.Authors.FirstOrDefaultAsync(x => x.Id == id);
-                return View(author);
+                Book? book = await _db.Books.FirstOrDefaultAsync(x => x.Id == id);
+                return View(book);
             }
             return NotFound();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Author author)
+        public async Task<IActionResult> Edit(Book book)
         {
             if (ModelState.IsValid)
             {
-                _db.Authors.Update(author);
+                _db.Books.Update(book);
                 await _db.SaveChangesAsync();
-                TempData["success"] = "The author has been edited succesfully!";
+                TempData["success"] = "The book has been edited succesfully!";
                 return RedirectToAction("Index");
             }
-            return View(author);
+            return View(book);
         }
 
         [HttpGet]
@@ -76,12 +74,12 @@ namespace Task_004.Controllers
         {
             if (id != null)
             {
-                Author? author = await _db.Authors.FirstOrDefaultAsync(x => x.Id == id);
-                if (author != null)
+                Book? book = await _db.Books.FirstOrDefaultAsync(x => x.Id == id);
+                if (book != null)
                 {
-                    _db.Authors.Remove(author);
+                    _db.Books.Remove(book);
                     await _db.SaveChangesAsync();
-                    TempData["success"] = "The author has been delited succesfully!";
+                    TempData["success"] = "Book has been delited succesfully!";
                     return RedirectToAction("Index");
                 }
             }
@@ -93,8 +91,8 @@ namespace Task_004.Controllers
         {
             if (id != null)
             {
-                Author? author = await _db.Authors.Include(x => x.Books).FirstOrDefaultAsync(x => x.Id == id);
-                return View(author);
+                Book? book = await _db.Books.Include(x => x.Authors).FirstOrDefaultAsync(x => x.Id == id);
+                return View(book);
             }
             return NotFound();
         }

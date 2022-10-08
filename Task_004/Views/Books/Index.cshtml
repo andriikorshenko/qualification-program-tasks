@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Book>
+@using Task_004.Models
+@using Task_004.ViewModels
+@{
+    ViewData["Title"] = "Books";
+}
+
+<partial name="_Notification" />
+<div class="container p-3">
+        <div>
+        <a asp-controller="Books" class="btn btn-primary" asp-action="Create"><i class="bi bi-plus-circle"></i> &nbsp; Create a New Book</a>
+        </div>
+        <br />
+    <table table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Books
+                </th>
+                <th>
+                    Pages
+                </th>
+                <th>
+                    Genre
+                </th>
+                <th>
+                    Options
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="50%">
+                        @item.Name
+                    </td>
+                    <td width="15%">
+                        @item.PageQty
+                    </td>
+                    <td width="15%">
+                        @item.Genre
+                    </td>
+                    <td td width="20%">
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Books" asp-action="Edit" asp-route-id="@item.Id">Edit</a><p>&nbsp;&nbsp;</p>
+                            <a asp-controller="Books" asp-action="Delete" asp-route-id="@item.Id">Delete</a><p>&nbsp;&nbsp;</p>
+                            <a asp-controller="Books" asp-action="Details" asp-route-id="@item.Id">Details</a><p>&nbsp;&nbsp;</p>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

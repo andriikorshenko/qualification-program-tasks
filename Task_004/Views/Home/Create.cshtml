@@ -3,7 +3,7 @@
     ViewData["Title"] = "Create an Author";
 }
 
-<form method="post" style="width: 75%; margin: auto">
+<form method="post" style="width: 100%; margin: auto">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2>Create a New Author</h2>
@@ -25,20 +25,48 @@
         </div>
         <div class="mb-3">
             <label asp-for="BirthDate"></label>
-            <input asp-for="BirthDate" class="form-control" value="DD/MM/YYYY">
+            <input asp-for="BirthDate" class="form-control">
             <span asp-validation-for="BirthDate" class="text-danger"></span>
         </div>
+        <div class="mb-3">
+            <label>Название</label>
+            <div>
+                <input type="text" name="Books[0].name" />
+            </div>
+            <div>
+                <input type="number" name="Books[0].pageqty" />
+            </div>
+            <div>
+                <input type="number" name="Books[0].genre" />
+            </div>
+        </div>
         <button type="submit" class="btn btn-primary" style="width:150px">
-            Create
+            <i class="bi bi-check-square"></i> &nbsp; Create
         </button>
         <a asp-controller="Home" asp-action="Index" class="btn btn-secondary" style="width:150px">
-            Cancel
+            <i class="bi bi-x-circle"></i> &nbsp; Cancel
         </a>
     </div>
 </form>
 
+<p><a class="addLink">Добавить новый элемент</a></p>
+
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(function () {
+            var i = 0;
+            $('.addLink').click(function () {
+                i++;
+                var html2Add = "<div class='bookItem'>" +
+                    "<h4>Книга № " + (i + 1) + "</h4>" +
+                    "<div><label>Название</label><div>" +
+                    "<input type='text' name='Books[" + i + "].name' />" +
+                    "</div></div></div>";
+                $('#booksBlock').append(html2Add);
+            })
+        })
+    </script>
 }
     <div style="margin-top:25px"></div>
     <div class="d-grid gap-2" style="width:75%; margin: auto">
@@ -54,7 +82,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <p>Add a book</p>
+                    <form action="">
+                        <input type="text" placeholder="Name">
+                        <input type="text" placeholder="Pages">
+                        <input type="text" placeholder="Genre">
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -63,6 +96,17 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
 
 @*
 <div class="pop-up" id="pop-up">
