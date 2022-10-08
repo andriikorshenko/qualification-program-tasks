@@ -28,18 +28,7 @@
             <input asp-for="BirthDate" class="form-control">
             <span asp-validation-for="BirthDate" class="text-danger"></span>
         </div>
-        <div class="mb-3">
-            <label>Название</label>
-            <div>
-                <input type="text" name="Books[0].name" />
-            </div>
-            <div>
-                <input type="number" name="Books[0].pageqty" />
-            </div>
-            <div>
-                <input type="number" name="Books[0].genre" />
-            </div>
-        </div>
+        <div id="books-items"></div>
         <button type="submit" class="btn btn-primary" style="width:150px">
             <i class="bi bi-check-square"></i> &nbsp; Create
         </button>
@@ -49,21 +38,34 @@
     </div>
 </form>
 
-<p><a class="addLink">Добавить новый элемент</a></p>
-
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
     <script>
         $(function () {
             var i = 0;
-            $('.addLink').click(function () {
+            var t = 1;
+            $('#save-book').click(function () {
+                const a = $('#books-name').val();
+                const b = $('#books-pageqty').val();
+                const c = $('#books-genre').val();
+                console.log(a);
+                console.log(b);
+                console.log(c);
+
+                $('#books-items').append("<p>Added a book # " + t + "</p>");
+                $('#books-items').append("<p>Books Name: " + a + "</p>");
+                $('#books-items').append("<p>Books PageQty: " + b + "</p>");
+                $('#books-items').append("<p>Books Gener: " + c + "</p>");
+
+                $('#books-items').append("<input type='hidden' value='" + a + "' name='Books[" + i + "].name' />");
+                $('#books-items').append("<input type='hidden' value='" + b + "' name='Books[" + i + "].pageqty' />");
+                $('#books-items').append("<input type='hidden' value='" + c + "' name='Books[" + i + "].genre' />");
                 i++;
-                var html2Add = "<div class='bookItem'>" +
-                    "<h4>Книга № " + (i + 1) + "</h4>" +
-                    "<div><label>Название</label><div>" +
-                    "<input type='text' name='Books[" + i + "].name' />" +
-                    "</div></div></div>";
-                $('#booksBlock').append(html2Add);
+                t++;
+
+                $('#books-name').val('');
+                $('#books-pageqty').val('');
+                $('#books-genre').val('');
             })
         })
     </script>
@@ -78,50 +80,36 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add a book</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Add a book</p>
-                    <form action="">
-                        <input type="text" placeholder="Name">
-                        <input type="text" placeholder="Pages">
-                        <input type="text" placeholder="Genre">
-                    </form>
+                        <div class="mb-3">
+                            <label>Name</label>
+                            <div style="margin-bottom: 15px">
+                                <input type="text" class="form-control" id="books-name" placeholder="Love Novel" />
+                            </div>
+                            <label>Page Qty</label>
+                            <div style="margin-bottom: 15px">
+                                <input type="number" class="form-control" id="books-pageqty" placeholder="321" />
+                            </div>
+                            <div class="mb-3">
+                                <label>Genre</label>
+                                <select for="Genre" class="form-select" id="books-genre">
+                                    <option value="0">AvantGarde</option>
+                                    <option value="1">Action</option>
+                                    <option value="2">Detective</option>
+                                    <option value="3">Historical</option>
+                                    <option value="4">Love</option>
+                                </select>
+                            </div>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="save-book">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-@*
-<div class="pop-up" id="pop-up">
-    <div class="pop-up-conteiner">
-        <div class="pop-up-body" id="pop-up-body">
-            <p>Add a book</p>
-            <form action="">
-                <input type="text" placeholder="Name">
-                <input type="text" placeholder="Pages">
-                <input type="text" placeholder="Genre">
-                <button>Add</button>
-            </form>
-            <div class="pop-up-close" id="pop-up-close">&#10006</div>
-        </div>
-    </div>
-</div>
-
-<script src="~/js/site.js"></script>*@

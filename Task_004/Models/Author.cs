@@ -20,6 +20,7 @@ namespace Task_004.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         [Required]
+        [DisplayName("Birth Date")]
         public DateTime BirthDate { get; set; }
 
         public ICollection<Book> Books { get; set; } = new List<Book>();

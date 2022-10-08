@@ -18,7 +18,7 @@ namespace Task_004.Models
 
         public override string ToString()
         {
-            return $"{Name} {PageQty} {Genre}";
+            return $"\"{Name}\", {PageQty} page(s) total and it's \"{Genre}\" by genre";
         }
     }
 
